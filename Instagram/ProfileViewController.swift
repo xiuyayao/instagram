@@ -17,7 +17,7 @@ class ProfileViewController: UIViewController {
             print("User logged out successfully")
 
             // go back to login by dismissing modal view
-            self.dismiss(animated: true, completion: nil)
+            // self.dismiss(animated: true, completion: nil)
             self.performSegue(withIdentifier: "logoutSegue", sender: nil)
         }
     }

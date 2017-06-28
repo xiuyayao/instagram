@@ -7,13 +7,78 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var posts: [PFObject]?
+    
+    
+    func refresh() {
+        let query = PFQuery(className: "Post")
+        query.order(byDescending: "createdAt")
+        query.includeKey("_p_author")
+        query.includeKey("_created_at")
+        query.limit = 20
+        
+        // for infinite scrolling
+        // query.skip = self.count
+        // self.count = self.count + 20
+        
+        // fetch data asynchronously
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts {
+                // do something with array of objects returned by cell
+                if self.posts != nil {
+                    self.posts!.append(contentsOf: posts)
+                } else {
+                    self.posts = posts
+                }
+                // for debugging
+                print("Number of posts: \(posts.count)")
+                // let post = posts[0]
+                
+                // print("Created at: \(post.createdAt)")
+                // self.loadingMoreView!.stopAnimating
+                // self.isMoreDataLoading = false
+                self.tableView.reloadData()
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+        
+    }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let posts = self.posts {
+            return posts.count
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // Hey go find thing with the identifier InstagramPostTableViewCell and cast it as InstagramPostTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "InstagramPostTableViewCell", for: indexPath) as! InstagramPostTableViewCell
+        let post = self.posts![indexPath.row] // posts is an optional and could be nil
+        cell.instagramPost = post
+        
+        return cell
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        refresh()
     }
 
     override func didReceiveMemoryWarning() {

@@ -15,6 +15,8 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBOutlet weak var captionToPost: UITextField!
     
+    var postImage = UIImage(named: "imageName")
+    var postCaption = ""
     
     @IBAction func sharePostAction(_ sender: UIButton) {
         postCaption = captionToPost.text ?? ""
@@ -22,9 +24,6 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
             print("Successfully posted")
         }
     }
-    
-    var postImage = UIImage(named: "imageName")
-    var postCaption = ""
     
     func imagePickerController(_ picker: UIImagePickerController,
     didFinishPickingMediaWithInfo info: [String : Any]) {
