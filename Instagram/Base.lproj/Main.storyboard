@@ -189,13 +189,38 @@
                     <view key="view" contentMode="scaleToFill" id="X7M-2P-aAF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J2P-ne-Rpg">
+                                <rect key="frame" x="67" y="72" width="240" height="240"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter caption here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gLF-lS-uOF">
+                                <rect key="frame" x="67" y="318" width="240" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t11-7K-1E7">
+                                <rect key="frame" x="232" y="356" width="75" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Share Post"/>
+                                <connections>
+                                    <action selector="sharePostAction:" destination="bPb-Fy-xsT" eventType="touchUpInside" id="xW0-E2-ApB"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="0KA-eK-mcE"/>
+                    <connections>
+                        <outlet property="captionToPost" destination="gLF-lS-uOF" id="j8B-an-qC7"/>
+                        <outlet property="imageToPost" destination="J2P-ne-Rpg" id="jRy-00-TuE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="phe-jv-eqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="908" y="2349"/>
+            <point key="canvasLocation" x="908" y="2348.2758620689656"/>
         </scene>
         <!--Interactions View Controller-->
         <scene sceneID="u0S-qW-u4q">
@@ -240,6 +265,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="aG7-1a-4tJ"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="aWs-jy-wig"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X8W-XH-8J6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -382,4 +410,7 @@
             <point key="canvasLocation" x="2430" y="1612"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="aWs-jy-wig"/>
+    </inferredMetricsTieBreakers>
 </document>

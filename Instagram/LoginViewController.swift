@@ -30,6 +30,10 @@ class LoginViewController: UIViewController {
                 print("User log in failed: \(error.localizedDescription)")
             } else {
                 print("User logged in successfully")
+                // clear text labels
+                self.usernameLabel.text = ""
+                self.passwordLabel.text = ""
+                
                 // display view controller that needs to shown after successful login
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }

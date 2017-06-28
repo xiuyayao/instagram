@@ -37,6 +37,10 @@ class SignUpViewController: UIViewController {
                 print(error.localizedDescription)
             } else {
                 print("User Registered successfully")
+                // clear text labels
+                self.emailLabel.text = ""
+                self.usernameLabel.text = ""
+                self.passwordLabel.text = ""
                 // manually segue to logged in view
                 // dismiss modal view
                 self.dismiss(animated: true, completion: nil)
