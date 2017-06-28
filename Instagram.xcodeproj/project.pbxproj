@@ -10,6 +10,10 @@
 		03E46B46157B46444D0A6909 /* Pods_InstagramUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB60428B007E3F886EBE60D /* Pods_InstagramUITests.framework */; };
 		0A23E9B21F031E280037D946 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23E9B11F031E280037D946 /* SignUpViewController.swift */; };
 		0A23E9B91F0332820037D946 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23E9B81F0332820037D946 /* HomeViewController.swift */; };
+		0A23E9BB1F0370640037D946 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23E9BA1F0370640037D946 /* SearchViewController.swift */; };
+		0A23E9BD1F0370720037D946 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23E9BC1F0370720037D946 /* NewPostViewController.swift */; };
+		0A23E9BF1F0370950037D946 /* InteractionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23E9BE1F0370950037D946 /* InteractionsViewController.swift */; };
+		0A23E9C11F0370A10037D946 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23E9C01F0370A10037D946 /* ProfileViewController.swift */; };
 		0ADE9D071F0308E9005A0027 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADE9D061F0308E9005A0027 /* AppDelegate.swift */; };
 		0ADE9D091F0308E9005A0027 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADE9D081F0308E9005A0027 /* LoginViewController.swift */; };
 		0ADE9D0C1F0308E9005A0027 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ADE9D0A1F0308E9005A0027 /* Main.storyboard */; };
@@ -42,6 +46,10 @@
 		0A052A1E71BEF7829F95D865 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 		0A23E9B11F031E280037D946 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		0A23E9B81F0332820037D946 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		0A23E9BA1F0370640037D946 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		0A23E9BC1F0370720037D946 /* NewPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
+		0A23E9BE1F0370950037D946 /* InteractionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionsViewController.swift; sourceTree = "<group>"; };
+		0A23E9C01F0370A10037D946 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0AB60428B007E3F886EBE60D /* Pods_InstagramUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ADE9D031F0308E9005A0027 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ADE9D061F0308E9005A0027 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +107,10 @@
 				0ADE9D081F0308E9005A0027 /* LoginViewController.swift */,
 				0A23E9B11F031E280037D946 /* SignUpViewController.swift */,
 				0A23E9B81F0332820037D946 /* HomeViewController.swift */,
+				0A23E9BA1F0370640037D946 /* SearchViewController.swift */,
+				0A23E9BC1F0370720037D946 /* NewPostViewController.swift */,
+				0A23E9BE1F0370950037D946 /* InteractionsViewController.swift */,
+				0A23E9C01F0370A10037D946 /* ProfileViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -256,6 +268,7 @@
 				TargetAttributes = {
 					0ADE9D021F0308E9005A0027 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = LZJYLDRCS5;
 						ProvisioningStyle = Automatic;
 					};
 					0ADE9D161F0308E9005A0027 = {
@@ -460,10 +473,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A23E9BB1F0370640037D946 /* SearchViewController.swift in Sources */,
+				0A23E9BF1F0370950037D946 /* InteractionsViewController.swift in Sources */,
 				0A23E9B21F031E280037D946 /* SignUpViewController.swift in Sources */,
 				0ADE9D091F0308E9005A0027 /* LoginViewController.swift in Sources */,
 				0ADE9D071F0308E9005A0027 /* AppDelegate.swift in Sources */,
 				0A23E9B91F0332820037D946 /* HomeViewController.swift in Sources */,
+				0A23E9C11F0370A10037D946 /* ProfileViewController.swift in Sources */,
+				0A23E9BD1F0370720037D946 /* NewPostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +633,7 @@
 			baseConfigurationReference = 0A052A1E71BEF7829F95D865 /* Pods-Instagram.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = LZJYLDRCS5;
 				INFOPLIST_FILE = Instagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.XiuyaYao.Instagram;
@@ -629,6 +647,7 @@
 			baseConfigurationReference = E9471BBCE66CE2EC5721B252 /* Pods-Instagram.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = LZJYLDRCS5;
 				INFOPLIST_FILE = Instagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.XiuyaYao.Instagram;

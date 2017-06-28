@@ -34,10 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Welcome back \(currentUser.username!) 😀")
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-            window?.rootViewController = homeViewController
+            let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+            // TabBarController is storyboard ID
+            window?.rootViewController = tabBarController
         }
-        
         return true
     }
 

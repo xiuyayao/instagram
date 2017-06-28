@@ -38,5 +38,9 @@
     <dict>
         <key>NSAllowsArbitraryLoads</key><true/>
     </dict>
+    <key>NSPhotoLibraryUsageDescription</key>               <!-- added this for photo library permission -->
+    <string>NeedLibrary access for uploading Images</string> <!-- added this for photo library permission -->
+    <key>NSCameraUsageDescription</key> <!-- added this for camera permission -->
+    <string>Need camera access for uploading Images</string> <!-- added this for camera permission -->
 </dict>
 </plist>
