@@ -16,7 +16,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UITextField!
     @IBOutlet weak var passwordLabel: UITextField!
     
-    
     @IBAction func loginUser(_ sender: UIButton) {
         
         view.endEditing(true)
@@ -29,6 +28,7 @@ class LoginViewController: UIViewController {
         let password = passwordLabel.text ?? ""
         
         PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
+            
             if let error = error {
                 print("User log in failed: \(error.localizedDescription)")
             } else {
@@ -53,7 +53,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
@@ -74,7 +74,5 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

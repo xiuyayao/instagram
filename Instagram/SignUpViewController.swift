@@ -18,6 +18,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordLabel: UITextField!
     
     @IBAction func registerUser(_ sender: UIButton) {
+        
         // dismiss keyboard
         view.endEditing(true)
         
@@ -35,6 +36,7 @@ class SignUpViewController: UIViewController {
         
         // call sign up function on the object
         newUser.signUpInBackground { (success: Bool, error: Error?) in
+            
             if let error = error {
                 self.present(self.signUpAlertController, animated: true)
                 print(error.localizedDescription)
@@ -69,7 +71,7 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignUpViewController.dismissKeyboard))
         
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
@@ -91,7 +93,6 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -101,5 +102,4 @@ class SignUpViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

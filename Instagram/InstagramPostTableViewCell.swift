@@ -21,7 +21,7 @@ class InstagramPostTableViewCell: UITableViewCell {
     var instagramPost: PFObject! {
         didSet {
             // AUTHOR PART DOES NOT WORK... HOW TO DISPLAY USERNAME
-            self.photoAuthor.text = instagramPost["author"] as? String
+            self.photoAuthor.text = instagramPost["_p_author"] as? String
             self.photoView.file = instagramPost["media"] as? PFFile
             self.photoView.loadInBackground()
             self.photoCaption.text = instagramPost["caption"] as? String

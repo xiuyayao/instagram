@@ -39,12 +39,10 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
             imageToPost.image = #imageLiteral(resourceName: "image_placeholder")
             captionToPost.text = ""
             
-            // NEED TO DO THIS
             // segue to home view controller after successful posting
             self.performSegue(withIdentifier: "homeSegue", sender: nil)
         }
     }
-    
     
     @IBAction func cameraPostAction(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -65,8 +63,8 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.present(vc, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController,
-    didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
         // Get the image captured by the UIImagePickerController
         // let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
@@ -79,7 +77,9 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
         dismiss(animated: true, completion: nil)
     }
     
+    // CHECK THIS FUNCTION AND MAKE SURE IT WORKS
     func resize(image: UIImage, newSize: CGSize) -> UIImage {
+        
         let resizeImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
         resizeImageView.contentMode = UIViewContentMode.scaleAspectFill
         resizeImageView.image = image
@@ -101,7 +101,7 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
         
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(NewPostViewController.dismissKeyboard))
         
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
@@ -115,6 +115,7 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
         vc.allowsEditing = true
         // vc.sourceType = UIImagePickerControllerSourceType.camera
         
+        // Old code, before choice of camera vs photo library was added
         /*
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             print("Camera is available 📸")
@@ -141,7 +142,6 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation

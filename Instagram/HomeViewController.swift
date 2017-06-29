@@ -12,18 +12,17 @@ import ParseUI
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
     @IBOutlet weak var tableView: UITableView!
     
     var posts: [PFObject]?
     var refreshControl: UIRefreshControl!
     
-    
     func refresh() {
+        
         let query = PFQuery(className: "Post")
         query.order(byDescending: "createdAt")
-        query.includeKey("_p_author")
-        query.includeKey("_created_at")
+        query.includeKey("author")
+        // query.includeKey("_created_at")
         query.limit = 20
         
         // for infinite scrolling
@@ -33,8 +32,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // fetch data asynchronously
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts {
-                // do something with array of objects returned by cell
                 
+                // do something with array of objects returned by cell
                 /*
                 if self.posts != nil {
                     self.posts!.append(contentsOf: posts)
@@ -53,9 +52,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 // self.loadingMoreView!.stopAnimating
                 // self.isMoreDataLoading = false
                 self.tableView.reloadData()
+                
             } else {
                 print(error!.localizedDescription)
             }
+            
             self.refreshControl.endRefreshing()
         }
     }
@@ -81,29 +82,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
         refresh()
         self.tableView.reloadData()
-        self.refreshControl.endRefreshing()
-    }
-    
-    //Calls this function when the tap is recognized.
-    func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
+        // self.refreshControl.endRefreshing()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.dismissKeyboard))
-        
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        //tap.cancelsTouchesInView = false
-        
-        view.addGestureRecognizer(tap)
-        
+
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .singleLine
+        tableView.separatorInset = UIEdgeInsets.zero
         
         refreshControl = UIRefreshControl()
         
@@ -119,15 +108,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // pass object through segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell) {
+            let post = posts?[indexPath.row]
+            let detailViewController = segue.destination as! DetailViewController
+            detailViewController.instagramPost = post
+        }
     }
-    */
-
 }
