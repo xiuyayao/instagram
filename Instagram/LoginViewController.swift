@@ -18,6 +18,9 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func loginUser(_ sender: UIButton) {
+        
+        view.endEditing(true)
+        
         if usernameLabel.text!.isEmpty || passwordLabel.text!.isEmpty {
             self.present(self.loginAlertController, animated: true)
         }
@@ -40,8 +43,23 @@ class LoginViewController: UIViewController {
         }
     }
 
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.dismissKeyboard))
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         // create an OK action

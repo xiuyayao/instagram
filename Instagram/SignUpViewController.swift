@@ -18,6 +18,9 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordLabel: UITextField!
     
     @IBAction func registerUser(_ sender: UIButton) {
+        // dismiss keyboard
+        view.endEditing(true)
+        
         if emailLabel.text!.isEmpty || usernameLabel.text!.isEmpty || passwordLabel.text!.isEmpty {
             self.present(self.signUpAlertController, animated: true)
         }
@@ -49,13 +52,29 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func cancelRegisterAction(_ sender: UIButton) {
+        // dismiss keyboard
+        view.endEditing(true)
         // dismiss modal view
         self.dismiss(animated: true, completion: nil)
     }
     
 
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.dismissKeyboard))
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
 
         // Do any additional setup after loading the view.
         
