@@ -52,8 +52,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print(error!.localizedDescription)
             }
         }
-        self.refreshControl.endRefreshing()
-        
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,6 +74,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
         refresh()
+        self.tableView.reloadData()
+        self.refreshControl.endRefreshing()
     }
     
     override func viewDidLoad() {
