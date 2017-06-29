@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tableView: UITableView!
     
     var posts: [PFObject]?
+    var refreshControl: UIRefreshControl!
     
     
     func refresh() {
@@ -46,10 +47,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 // self.loadingMoreView!.stopAnimating
                 // self.isMoreDataLoading = false
                 self.tableView.reloadData()
+                // self.refreshControl.endRefreshing()
             } else {
                 print(error!.localizedDescription)
             }
         }
+        self.refreshControl.endRefreshing()
         
     }
 
@@ -71,12 +74,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    func didPullToRefresh(_ refreshControl: UIRefreshControl) {
+        refresh()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+        
+        refreshControl = UIRefreshControl()
+        
+        // If it had an event, who is it going to notify?
+        refreshControl.addTarget(self, action: #selector(HomeViewController.didPullToRefresh(_:)), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
         
         refresh()
     }
