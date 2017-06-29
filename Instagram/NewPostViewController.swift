@@ -11,18 +11,47 @@ import Parse
 
 class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    let cameraSelectAlertController = UIAlertController(title: "Camera NOT available", message: "Please select Photo Library", preferredStyle: .alert)
+    
     @IBOutlet weak var imageToPost: UIImageView!
     
     @IBOutlet weak var captionToPost: UITextField!
     
     var postImage = UIImage(named: "imageName")
     var postCaption = ""
+    let vc = UIImagePickerController()
     
     @IBAction func sharePostAction(_ sender: UIButton) {
         postCaption = captionToPost.text ?? ""
         Post.postUserImage(image: imageToPost.image, withCaption: postCaption) { (status: Bool, error: Error?) in
-            print("Successfully posted")
+            print("Post successful")
         }
+        // clear image and caption
+        imageToPost.image = #imageLiteral(resourceName: "image_placeholder")
+        captionToPost.text = ""
+        
+        // NEED TO DO THIS
+        // segue to home view controller after successful posting
+    }
+    
+    
+    @IBAction func cameraPostAction(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            print("Camera is available 📸")
+            vc.sourceType = .camera
+            self.present(vc, animated: true, completion: nil)
+        } else {
+            self.present(self.cameraSelectAlertController, animated: true)
+            /*
+            print("Camera 🚫 available so we will use photo library instead")
+            vc.sourceType = .photoLibrary
+            */
+        }
+    }
+    
+    @IBAction func photoLibraryAction(_ sender: UIButton) {
+        vc.sourceType = .photoLibrary
+        self.present(vc, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController,
@@ -56,11 +85,12 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         // Do any additional setup after loading the view.
         
-        let vc = UIImagePickerController()
+        // let vc = UIImagePickerController()
         vc.delegate = self
         vc.allowsEditing = true
         // vc.sourceType = UIImagePickerControllerSourceType.camera
-         
+        
+        /*
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             print("Camera is available 📸")
             vc.sourceType = .camera
@@ -68,8 +98,15 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
             print("Camera 🚫 available so we will use photo library instead")
             vc.sourceType = .photoLibrary
         }
-         
         self.present(vc, animated: true, completion: nil)
+         */
+        
+        // create an OK action
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            // handle response here.
+        }
+        // add the OK action to the alert controller
+        cameraSelectAlertController.addAction(OKAction)
     }
 
     override func didReceiveMemoryWarning() {

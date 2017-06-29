@@ -11,7 +11,7 @@ import Parse
 
 class LoginViewController: UIViewController {
     
-    let loginAlertController = UIAlertController(title: "Invalid Input", message: "Please valid username AND password", preferredStyle: .alert)
+    let loginAlertController = UIAlertController(title: "Invalid Input", message: "Please enter valid username AND password", preferredStyle: .alert)
     
     @IBOutlet weak var usernameLabel: UITextField!
     @IBOutlet weak var passwordLabel: UITextField!
