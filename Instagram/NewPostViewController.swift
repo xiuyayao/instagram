@@ -11,6 +11,8 @@ import Parse
 
 class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    let postAlertController = UIAlertController(title: "Invalid Action", message: "Please select an image to post", preferredStyle: .alert)
+    
     let cameraSelectAlertController = UIAlertController(title: "Camera NOT available", message: "Please select Photo Library", preferredStyle: .alert)
     
     @IBOutlet weak var imageToPost: UIImageView!
@@ -22,16 +24,25 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
     let vc = UIImagePickerController()
     
     @IBAction func sharePostAction(_ sender: UIButton) {
-        postCaption = captionToPost.text ?? ""
-        Post.postUserImage(image: imageToPost.image, withCaption: postCaption) { (status: Bool, error: Error?) in
-            print("Post successful")
-        }
-        // clear image and caption
-        imageToPost.image = #imageLiteral(resourceName: "image_placeholder")
-        captionToPost.text = ""
         
-        // NEED TO DO THIS
-        // segue to home view controller after successful posting
+        postCaption = captionToPost.text ?? ""
+        
+        if (imageToPost.image == #imageLiteral(resourceName: "image_placeholder")) {
+            // print error message
+            self.present(self.postAlertController, animated: true)
+            
+        } else {
+            Post.postUserImage(image: imageToPost.image, withCaption: postCaption) { (status: Bool, error: Error?) in
+                print("Post successful")
+            }
+            // clear image and caption
+            imageToPost.image = #imageLiteral(resourceName: "image_placeholder")
+            captionToPost.text = ""
+            
+            // NEED TO DO THIS
+            // segue to home view controller after successful posting
+            self.performSegue(withIdentifier: "homeSegue", sender: nil)
+        }
     }
     
     
@@ -121,6 +132,9 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         // add the OK action to the alert controller
         cameraSelectAlertController.addAction(OKAction)
+        
+        // add the OK action to the alert controller
+        postAlertController.addAction(OKAction)
     }
 
     override func didReceiveMemoryWarning() {

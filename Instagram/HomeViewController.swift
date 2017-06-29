@@ -34,11 +34,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts {
                 // do something with array of objects returned by cell
+                
+                /*
                 if self.posts != nil {
                     self.posts!.append(contentsOf: posts)
                 } else {
                     self.posts = posts
                 }
+                */
+                
+                self.posts = posts
+                
                 // for debugging
                 print("Number of posts: \(posts.count)")
                 // let post = posts[0]
@@ -47,10 +53,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 // self.loadingMoreView!.stopAnimating
                 // self.isMoreDataLoading = false
                 self.tableView.reloadData()
-                // self.refreshControl.endRefreshing()
             } else {
                 print(error!.localizedDescription)
             }
+            self.refreshControl.endRefreshing()
         }
     }
 
