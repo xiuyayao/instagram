@@ -97,8 +97,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = .singleLine
-        tableView.separatorInset = UIEdgeInsets.zero
+        tableView.separatorStyle = .none
+        // tableView.separatorStyle = .singleLine
+        // tableView.separatorInset = UIEdgeInsets.zero
         
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()

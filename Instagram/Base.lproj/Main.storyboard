@@ -90,15 +90,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="475" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yk2-vX-jdV">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="504" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yk2-vX-jdV">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InstagramPostTableViewCell" id="xqZ-vD-HNU" customClass="InstagramPostTableViewCell" customModule="Instagram" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="475"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InstagramPostTableViewCell" rowHeight="504" id="xqZ-vD-HNU" customClass="InstagramPostTableViewCell" customModule="Instagram" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="504"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xqZ-vD-HNU" id="K3v-xK-F4G">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="474"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="503"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post Author" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tnb-EC-bzS">
@@ -117,7 +117,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post Caption" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nny-G2-tXr">
-                                                    <rect key="frame" x="16" y="429" width="359" height="29"/>
+                                                    <rect key="frame" x="16" y="467" width="359" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -129,21 +129,42 @@
                                                         <constraint firstAttribute="width" constant="30" id="v2T-9W-PWE"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvf-k5-eRw">
+                                                    <rect key="frame" x="16" y="429" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="4m3-ZA-UiX"/>
+                                                        <constraint firstAttribute="width" constant="30" id="Ltu-gf-qEI"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Like" image="icons8-Heart-50"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0fp-Vi-4CH">
+                                                    <rect key="frame" x="54" y="429" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="QbW-cN-dzI"/>
+                                                        <constraint firstAttribute="width" constant="30" id="cBq-iI-Xzh"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Comment" image="icons8-Speech Bubble-50"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Tnb-EC-bzS" secondAttribute="trailing" constant="8" id="0st-eK-qXv"/>
+                                                <constraint firstItem="Zvf-k5-eRw" firstAttribute="leading" secondItem="K3v-xK-F4G" secondAttribute="leadingMargin" constant="8" id="2Wh-EG-PG9"/>
+                                                <constraint firstItem="Nny-G2-tXr" firstAttribute="top" secondItem="Zvf-k5-eRw" secondAttribute="bottom" constant="8" id="47k-Uy-ItL"/>
+                                                <constraint firstAttribute="bottom" secondItem="Nny-G2-tXr" secondAttribute="bottom" constant="8" id="GUp-6Y-ZdK"/>
                                                 <constraint firstItem="2ns-s3-sDT" firstAttribute="top" secondItem="Tnb-EC-bzS" secondAttribute="bottom" constant="8" id="JbW-Ys-9Yf"/>
-                                                <constraint firstItem="Nny-G2-tXr" firstAttribute="top" secondItem="2ns-s3-sDT" secondAttribute="bottom" constant="8" id="Jqp-Kv-KbO"/>
                                                 <constraint firstItem="GcG-BY-fhy" firstAttribute="leading" secondItem="K3v-xK-F4G" secondAttribute="leading" constant="8" id="Oo6-p2-C8M"/>
                                                 <constraint firstItem="Nny-G2-tXr" firstAttribute="leading" secondItem="K3v-xK-F4G" secondAttribute="leadingMargin" constant="8" id="Xmj-R9-3Iu"/>
-                                                <constraint firstItem="Nny-G2-tXr" firstAttribute="top" secondItem="2ns-s3-sDT" secondAttribute="bottom" constant="8" id="eo1-cd-IN2"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Nny-G2-tXr" secondAttribute="bottom" constant="8" id="hYp-mC-lnw"/>
+                                                <constraint firstItem="0fp-Vi-4CH" firstAttribute="top" secondItem="2ns-s3-sDT" secondAttribute="bottom" constant="8" id="Yny-h9-CZr"/>
+                                                <constraint firstItem="Zvf-k5-eRw" firstAttribute="top" secondItem="2ns-s3-sDT" secondAttribute="bottom" constant="8" id="Z8a-xh-dBI"/>
+                                                <constraint firstItem="0fp-Vi-4CH" firstAttribute="leading" secondItem="Zvf-k5-eRw" secondAttribute="trailing" constant="8" id="Zny-Wc-vtT"/>
+                                                <constraint firstItem="0fp-Vi-4CH" firstAttribute="leading" secondItem="Zvf-k5-eRw" secondAttribute="trailing" constant="8" id="hFX-Ai-X5D"/>
                                                 <constraint firstAttribute="trailing" secondItem="2ns-s3-sDT" secondAttribute="trailing" id="jrd-Rb-vP6"/>
                                                 <constraint firstItem="2ns-s3-sDT" firstAttribute="top" secondItem="GcG-BY-fhy" secondAttribute="bottom" constant="8" id="ksa-Ab-CE6"/>
                                                 <constraint firstItem="2ns-s3-sDT" firstAttribute="leading" secondItem="K3v-xK-F4G" secondAttribute="leading" id="lK4-J0-acX"/>
                                                 <constraint firstItem="Tnb-EC-bzS" firstAttribute="leading" secondItem="GcG-BY-fhy" secondAttribute="trailing" constant="8" id="njE-gd-n1z"/>
                                                 <constraint firstItem="Nny-G2-tXr" firstAttribute="trailing" secondItem="K3v-xK-F4G" secondAttribute="trailingMargin" constant="8" id="tLX-3w-suh"/>
                                                 <constraint firstItem="GcG-BY-fhy" firstAttribute="top" secondItem="K3v-xK-F4G" secondAttribute="top" constant="8" id="vXW-ar-V6p"/>
+                                                <constraint firstItem="Nny-G2-tXr" firstAttribute="top" secondItem="0fp-Vi-4CH" secondAttribute="bottom" constant="8" id="xHV-5M-Nef"/>
                                                 <constraint firstItem="Tnb-EC-bzS" firstAttribute="top" secondItem="K3v-xK-F4G" secondAttribute="top" constant="8" id="yDq-jB-Lgc"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -161,7 +182,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yk2-vX-jdV" firstAttribute="leading" secondItem="n4R-jX-JUn" secondAttribute="leading" id="IYu-Nf-T9A"/>
-                            <constraint firstItem="but-dd-bkZ" firstAttribute="top" secondItem="yk2-vX-jdV" secondAttribute="bottom" id="OnU-38-BJT"/>
+                            <constraint firstAttribute="bottom" secondItem="yk2-vX-jdV" secondAttribute="bottom" id="h0f-sa-gUQ"/>
                             <constraint firstAttribute="trailing" secondItem="yk2-vX-jdV" secondAttribute="trailing" id="nlM-T0-C8h"/>
                             <constraint firstItem="yk2-vX-jdV" firstAttribute="top" secondItem="n4R-jX-JUn" secondAttribute="top" id="o7I-Lh-oF3"/>
                         </constraints>
@@ -606,7 +627,9 @@
     <resources>
         <image name="feed_tab" width="25" height="25"/>
         <image name="icons8-Heart Filled-50" width="25" height="25"/>
+        <image name="icons8-Heart-50" width="25" height="25"/>
         <image name="icons8-Search Filled-50" width="25" height="25"/>
+        <image name="icons8-Speech Bubble-50" width="25" height="25"/>
         <image name="image_placeholder" width="375" height="375"/>
         <image name="insta_camera_btn" width="25" height="25"/>
         <image name="login_logo_2" width="400" height="225"/>
