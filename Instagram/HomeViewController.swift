@@ -22,6 +22,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let query = PFQuery(className: "Post")
         query.order(byDescending: "createdAt")
         query.includeKey("author")
+        // HELP: WHEN TO USE createdAt and _created_at
         // query.includeKey("_created_at")
         query.limit = 20
         
@@ -110,8 +111,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // pass object through segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         let cell = sender as! UITableViewCell
+        
         if let indexPath = tableView.indexPath(for: cell) {
+            
             let post = posts?[indexPath.row]
             let detailViewController = segue.destination as! DetailViewController
             detailViewController.instagramPost = post

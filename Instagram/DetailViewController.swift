@@ -12,7 +12,6 @@ import ParseUI
 
 class DetailViewController: UIViewController {
     
-    
     @IBOutlet weak var detailImageView: PFImageView!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!

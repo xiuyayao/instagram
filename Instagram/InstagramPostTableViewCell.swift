@@ -7,21 +7,22 @@
 //
 
 import UIKit
+import Parse
 import ParseUI
 
 class InstagramPostTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var photoAuthor: UILabel!
-    
     @IBOutlet weak var photoView: PFImageView!
-    
     @IBOutlet weak var photoCaption: UILabel!
 
     var instagramPost: PFObject! {
         didSet {
-            // AUTHOR PART DOES NOT WORK... HOW TO DISPLAY USERNAME
-            self.photoAuthor.text = instagramPost["_p_author"] as? String
+            
+            let author = instagramPost["author"] as! PFUser
+            self.photoAuthor.text = author.username!
+
             self.photoView.file = instagramPost["media"] as? PFFile
             self.photoView.loadInBackground()
             self.photoCaption.text = instagramPost["caption"] as? String
@@ -38,5 +39,4 @@ class InstagramPostTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

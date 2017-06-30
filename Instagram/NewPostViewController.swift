@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -16,7 +17,6 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
     let cameraSelectAlertController = UIAlertController(title: "Camera NOT available", message: "Please select Photo Library", preferredStyle: .alert)
     
     @IBOutlet weak var imageToPost: UIImageView!
-    
     @IBOutlet weak var captionToPost: UITextField!
     
     var postImage = UIImage(named: "imageName")
@@ -40,7 +40,8 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
             captionToPost.text = ""
             
             // segue to home view controller after successful posting
-            self.performSegue(withIdentifier: "homeSegue", sender: nil)
+            // HELP: SEGUE NOT WORKING, REMOVES TAB BAR
+            // self.performSegue(withIdentifier: "homeSegue", sender: nil)
         }
     }
     
@@ -59,19 +60,35 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func photoLibraryAction(_ sender: UIButton) {
+        print("Using photo library")
         vc.sourceType = .photoLibrary
         self.present(vc, animated: true, completion: nil)
     }
     
+    // HELP: Creating an image format with an unknown type is an error
+    // ERROR MESSAGE ABOVE IS GENERATED AFTER CHOOSING PIC FROM LIBRARY
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            print("edited")
+            imageToPost.image = image
+        }
+        else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            print("original")
+            imageToPost.image = image
+        } else{
+            print("Something went wrong")
+        }
+        
+        /*
         // Get the image captured by the UIImagePickerController
-        // let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
      
         // Do something with the images (based on your use case)
         postImage = editedImage
         imageToPost.image = editedImage
+        */
      
         // Dismiss UIImagePickerController to go back to your original view controller
         dismiss(animated: true, completion: nil)
@@ -107,8 +124,6 @@ class NewPostViewController: UIViewController, UIImagePickerControllerDelegate, 
         //tap.cancelsTouchesInView = false
         
         view.addGestureRecognizer(tap)
-
-        // Do any additional setup after loading the view.
         
         // let vc = UIImagePickerController()
         vc.delegate = self

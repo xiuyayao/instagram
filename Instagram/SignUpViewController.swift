@@ -8,7 +8,7 @@
 
 import UIKit
 import Parse
-
+import ParseUI
 class SignUpViewController: UIViewController {
     
     let signUpAlertController = UIAlertController(title: "Invalid Input", message: "Please enter valid credentials", preferredStyle: .alert)

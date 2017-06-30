@@ -16,6 +16,8 @@
 		0A23E9BF1F0370950037D946 /* InteractionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23E9BE1F0370950037D946 /* InteractionsViewController.swift */; };
 		0A23E9C11F0370A10037D946 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A23E9C01F0370A10037D946 /* ProfileViewController.swift */; };
 		0A55B1791F04318900D8F0C9 /* InstagramPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A55B1781F04318900D8F0C9 /* InstagramPostTableViewCell.swift */; };
+		0A75F4511F05C90300796942 /* ProfileCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75F4501F05C90300796942 /* ProfileCollectionReusableView.swift */; };
+		0A75F4531F05C91C00796942 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A75F4521F05C91C00796942 /* ProfileCollectionViewCell.swift */; };
 		0A8FCC521F04CDEF000D015A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A8FCC511F04CDEF000D015A /* Assets.xcassets */; };
 		0A9F86A01F0597C3006A5238 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9F869F1F0597C3006A5238 /* DetailViewController.swift */; };
 		0ADE9D071F0308E9005A0027 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADE9D061F0308E9005A0027 /* AppDelegate.swift */; };
@@ -55,6 +57,8 @@
 		0A23E9BE1F0370950037D946 /* InteractionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionsViewController.swift; sourceTree = "<group>"; };
 		0A23E9C01F0370A10037D946 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0A55B1781F04318900D8F0C9 /* InstagramPostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramPostTableViewCell.swift; sourceTree = "<group>"; };
+		0A75F4501F05C90300796942 /* ProfileCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionReusableView.swift; sourceTree = "<group>"; };
+		0A75F4521F05C91C00796942 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A8FCC511F04CDEF000D015A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 		0A9F869F1F0597C3006A5238 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		0AB60428B007E3F886EBE60D /* Pods_InstagramUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +155,8 @@
 				0ADE9D061F0308E9005A0027 /* AppDelegate.swift */,
 				0A0919B81F04119900696510 /* Post.swift */,
 				0A55B1781F04318900D8F0C9 /* InstagramPostTableViewCell.swift */,
+				0A75F4501F05C90300796942 /* ProfileCollectionReusableView.swift */,
+				0A75F4521F05C91C00796942 /* ProfileCollectionViewCell.swift */,
 				0ADE9D0A1F0308E9005A0027 /* Main.storyboard */,
 				0ADE9D0F1F0308E9005A0027 /* LaunchScreen.storyboard */,
 				0ADE9D121F0308E9005A0027 /* Info.plist */,
@@ -487,8 +493,10 @@
 				0A23E9BB1F0370640037D946 /* SearchViewController.swift in Sources */,
 				0A23E9BF1F0370950037D946 /* InteractionsViewController.swift in Sources */,
 				0A23E9B21F031E280037D946 /* SignUpViewController.swift in Sources */,
+				0A75F4511F05C90300796942 /* ProfileCollectionReusableView.swift in Sources */,
 				0ADE9D091F0308E9005A0027 /* LoginViewController.swift in Sources */,
 				0ADE9D071F0308E9005A0027 /* AppDelegate.swift in Sources */,
+				0A75F4531F05C91C00796942 /* ProfileCollectionViewCell.swift in Sources */,
 				0A23E9B91F0332820037D946 /* HomeViewController.swift in Sources */,
 				0A0919B91F04119900696510 /* Post.swift in Sources */,
 				0A23E9C11F0370A10037D946 /* ProfileViewController.swift in Sources */,

@@ -8,8 +8,9 @@
 
 import UIKit
 import Parse
+import ParseUI
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UICollectionViewDataSource {
     
     @IBAction func logoutUser(_ sender: UIButton) {
         
@@ -26,10 +27,80 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    var posts: [PFObject]?
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let posts = self.posts {
+            return posts.count
+        } else {
+            return 0
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCollectionViewCell", for: indexPath) as! ProfileCollectionViewCell
+        let post = self.posts![indexPath.row] // posts is an optional and could be nil
+        cell.instagramPost = post
+        
+        return cell
+    }
+    
+    func refresh() {
+        
+        let query = PFQuery(className: "Post")
+        query.whereKey("author", equalTo: PFUser.current()!)
+        query.order(byDescending: "createdAt")
+        query.includeKey("author")
+        // HELP: FOR SAME REASONS AS HOMEVIEWCONTROLLER
+        // query.includeKey("_created_at")
+        query.limit = 20
+        
+        // for infinite scrolling
+        // query.skip = self.count
+        // self.count = self.count + 20
+        
+        // fetch data asynchronously
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts {
+                
+                // do something with array of objects returned by cell
+                /*
+                 if self.posts != nil {
+                 self.posts!.append(contentsOf: posts)
+                 } else {
+                 self.posts = posts
+                 }
+                 */
+                
+                self.posts = posts
+                
+                // for debugging
+                print("Number of posts: \(posts.count)")
+                // let post = posts[0]
+                
+                // print("Created at: \(post.createdAt)")
+                // self.loadingMoreView!.stopAnimating
+                // self.isMoreDataLoading = false
+                self.collectionView.reloadData()
+                
+            } else {
+                print(error!.localizedDescription)
+            }
+            
+            // self.refreshControl.endRefreshing()
+        }
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        collectionView.delegate = self as? UICollectionViewDelegate
+        collectionView.dataSource = self
+        refresh()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +108,18 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let cell = sender as! UICollectionViewCell
+        
+        if let indexPath = collectionView.indexPath(for: cell) {
+            
+            let post = posts?[indexPath.row]
+            let detailViewController = segue.destination as! DetailViewController
+            detailViewController.instagramPost = post
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
