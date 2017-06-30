@@ -12,6 +12,7 @@ import ParseUI
 
 class DetailViewController: UIViewController {
     
+    @IBOutlet weak var photoAuthor: UILabel!
     @IBOutlet weak var detailImageView: PFImageView!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -28,6 +29,7 @@ class DetailViewController: UIViewController {
         captionLabel.text = instagramPost["caption"] as? String
         
         let author = instagramPost["author"] as! PFUser
+        photoAuthor.text = author.username!
         authorLabel.text = "Username: " + author.username!
 
         if let date = instagramPost.createdAt {
