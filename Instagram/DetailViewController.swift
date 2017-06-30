@@ -29,15 +29,17 @@ class DetailViewController: UIViewController {
         captionLabel.text = instagramPost["caption"] as? String
         
         let author = instagramPost["author"] as! PFUser
-        photoAuthor.text = author.username!
-        authorLabel.text = "Username: " + author.username!
+        photoAuthor.text = author.username
+        // authorLabel.text = "Username: " + author.username!
+        authorLabel.text = author.username
 
         if let date = instagramPost.createdAt {
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .medium
             dateFormatter.timeStyle = .short
             let dateString = dateFormatter.string(from: date)
-            dateLabel.text = "Date: " + dateString
+            // dateLabel.text = "Date: " + dateString
+            dateLabel.text = "Posted on " + dateString
             print(dateString) // Prints: Jun 28, 2017, 2:08 PM
         }
         
