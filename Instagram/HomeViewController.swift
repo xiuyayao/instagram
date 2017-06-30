@@ -17,6 +17,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var posts: [PFObject]?
     var refreshControl: UIRefreshControl!
     
+    // HEADER CODE
+    let CellIdentifier = "TableViewCell", HeaderViewIdentifier = "TableViewHeaderView"
+    
     func refresh() {
         
         let query = PFQuery(className: "Post")
@@ -80,11 +83,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
         refresh()
         self.tableView.reloadData()
         // self.refreshControl.endRefreshing()
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +99,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dataSource = self
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = UIEdgeInsets.zero
+        
+        tableView.setNeedsLayout()
+        tableView.layoutIfNeeded()
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         refreshControl = UIRefreshControl()
         

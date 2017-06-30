@@ -12,7 +12,8 @@ import ParseUI
 
 class InstagramPostTableViewCell: UITableViewCell {
     
-    
+    // HELP DISPLAY PROFILE PICTURE
+    @IBOutlet weak var photoProfilePic: PFImageView!
     @IBOutlet weak var photoAuthor: UILabel!
     @IBOutlet weak var photoView: PFImageView!
     @IBOutlet weak var photoCaption: UILabel!
