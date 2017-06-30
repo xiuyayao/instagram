@@ -10,24 +10,26 @@ import UIKit
 import Parse
 import ParseUI
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var posts: [PFObject]?
+    var posts: [PFObject] = []
     var refreshControl: UIRefreshControl!
     
-    // HEADER CODE
-    let CellIdentifier = "TableViewCell", HeaderViewIdentifier = "TableViewHeaderView"
+    // Create a flag
+    var isMoreDataLoading = false
+    var loadingMoreView: InfiniteScrollActivityView?
     
-    func refresh() {
+    
+    func refresh(withLimit limit: Int = 4) {
         
         let query = PFQuery(className: "Post")
         query.order(byDescending: "createdAt")
         query.includeKey("author")
         // HELP: WHEN TO USE createdAt and _created_at
         // query.includeKey("_created_at")
-        query.limit = 20
+        query.limit = limit
         
         // for infinite scrolling
         // query.skip = self.count
@@ -49,35 +51,39 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.posts = posts
                 
                 // for debugging
-                print("Number of posts: \(posts.count)")
+                print("Number of posts in Home Feed: \(posts.count)")
                 // let post = posts[0]
                 
-                // print("Created at: \(post.createdAt)")
-                // self.loadingMoreView!.stopAnimating
-                // self.isMoreDataLoading = false
+                // Stop the loading indicator
+                self.loadingMoreView?.stopAnimating()
+                // Update flag
+                self.isMoreDataLoading = false
+                // Reload the tableView now that there is new data
                 self.tableView.reloadData()
                 
             } else {
                 print(error!.localizedDescription)
             }
-            
             self.refreshControl.endRefreshing()
         }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.posts.count
+        /*
         if let posts = self.posts {
             return posts.count
         } else {
             return 0
         }
+        */
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Hey go find thing with the identifier InstagramPostTableViewCell and cast it as InstagramPostTableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "InstagramPostTableViewCell", for: indexPath) as! InstagramPostTableViewCell
-        let post = self.posts![indexPath.row] // posts is an optional and could be nil
+        let post = self.posts[indexPath.row] // posts is an optional and could be nil
         cell.instagramPost = post
         
         return cell
@@ -90,6 +96,26 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // self.refreshControl.endRefreshing()
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+                isMoreDataLoading = true
+                
+                // Update position of loadingMoreView, and start loading indicator
+                let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
+                loadingMoreView?.frame = frame
+                loadingMoreView!.startAnimating()
+                
+                // Code to load more results
+                refresh(withLimit: self.posts.count + 4)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,6 +138,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         refreshControl.addTarget(self, action: #selector(HomeViewController.didPullToRefresh(_:)), for: .valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
         
+        // Set up Infinite Scroll loading indicator
+        let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
+        loadingMoreView = InfiniteScrollActivityView(frame: frame)
+        loadingMoreView!.isHidden = true
+        tableView.addSubview(loadingMoreView!)
+        
+        var insets = tableView.contentInset
+        insets.bottom += InfiniteScrollActivityView.defaultHeight
+        tableView.contentInset = insets
+        
         refresh()
     }
 
@@ -127,9 +163,45 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if let indexPath = tableView.indexPath(for: cell) {
             
-            let post = posts?[indexPath.row]
+            let post = posts[indexPath.row]
             let detailViewController = segue.destination as! DetailViewController
             detailViewController.instagramPost = post
+        }
+    }
+    
+    class InfiniteScrollActivityView: UIView {
+        var activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
+        static let defaultHeight:CGFloat = 60.0
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+            setupActivityIndicator()
+        }
+        
+        override init(frame aRect: CGRect) {
+            super.init(frame: aRect)
+            setupActivityIndicator()
+        }
+        
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            activityIndicatorView.center = CGPoint(x: self.bounds.size.width/2, y: self.bounds.size.height/2)
+        }
+        
+        func setupActivityIndicator() {
+            activityIndicatorView.activityIndicatorViewStyle = .gray
+            activityIndicatorView.hidesWhenStopped = true
+            self.addSubview(activityIndicatorView)
+        }
+        
+        func stopAnimating() {
+            self.activityIndicatorView.stopAnimating()
+            self.isHidden = true
+        }
+        
+        func startAnimating() {
+            self.isHidden = false
+            self.activityIndicatorView.startAnimating()
         }
     }
 }

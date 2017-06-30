@@ -30,22 +30,8 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var posts: [PFObject]?
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let posts = self.posts {
-            return posts.count
-        } else {
-            return 0
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCollectionViewCell", for: indexPath) as! ProfileCollectionViewCell
-        let post = self.posts![indexPath.row] // posts is an optional and could be nil
-        cell.instagramPost = post
-        
-        return cell
-    }
+    // PULL TO REFRESH DOES NOT WORK FOR COLLECTION VIEW
+    // var refreshControl: UIRefreshControl!
     
     func refresh() {
         
@@ -77,7 +63,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
                 self.posts = posts
                 
                 // for debugging
-                print("Number of posts: \(posts.count)")
+                print("Number of posts by User: \(posts.count)")
                 // let post = posts[0]
                 
                 // print("Created at: \(post.createdAt)")
@@ -92,6 +78,31 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
             // self.refreshControl.endRefreshing()
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let posts = self.posts {
+            return posts.count
+        } else {
+            return 0
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCollectionViewCell", for: indexPath) as! ProfileCollectionViewCell
+        let post = self.posts![indexPath.row] // posts is an optional and could be nil
+        cell.instagramPost = post
+        
+        return cell
+    }
+    
+    // PULL TO REFRESH DOES NOT WORK FOR COLLECTION VIEW
+    /*
+    func didPullToRefresh(_ refreshControl: UIRefreshControl) {
+        refresh()
+        self.collectionView.reloadData()
+        // self.refreshControl.endRefreshing()
+    }
+    */
 
     
     override func viewDidLoad() {
@@ -100,6 +111,13 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
         // Do any additional setup after loading the view.
         collectionView.delegate = self as? UICollectionViewDelegate
         collectionView.dataSource = self
+        
+        // refreshControl = UIRefreshControl()
+        
+        // If it had an event, who is it going to notify?
+        // refreshControl.addTarget(self, action: #selector(ProfileViewController.didPullToRefresh(_:)), for: .valueChanged)
+        // collectionView.insertSubview(refreshControl, at: 0)
+        
         refresh()
     }
 
@@ -119,15 +137,4 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
             detailViewController.instagramPost = post
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
