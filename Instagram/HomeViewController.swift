@@ -22,7 +22,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var loadingMoreView: InfiniteScrollActivityView?
     
     
-    func refresh(withLimit limit: Int = 15) {
+    func refresh(withLimit limit: Int = 20) {
         
         let query = PFQuery(className: "Post")
         query.order(byDescending: "createdAt")
@@ -112,7 +112,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 loadingMoreView!.startAnimating()
                 
                 // Code to load more results
-                refresh(withLimit: self.posts.count + 15)
+                refresh(withLimit: self.posts.count + 20)
             }
         }
     }
