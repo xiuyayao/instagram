@@ -22,7 +22,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var loadingMoreView: InfiniteScrollActivityView?
     
     
-    func refresh(withLimit limit: Int = 4) {
+    func refresh(withLimit limit: Int = 15) {
         
         let query = PFQuery(className: "Post")
         query.order(byDescending: "createdAt")
@@ -112,7 +112,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 loadingMoreView!.startAnimating()
                 
                 // Code to load more results
-                refresh(withLimit: self.posts.count + 4)
+                refresh(withLimit: self.posts.count + 15)
             }
         }
     }
@@ -159,7 +159,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // pass object through segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let cell = sender as! UITableViewCell
+        // let cell = sender as! UITableViewCell
+        
+        let cell = sender as! InstagramPostTableViewCell
         
         if let indexPath = tableView.indexPath(for: cell) {
             

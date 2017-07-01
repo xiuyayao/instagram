@@ -14,17 +14,25 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     
     @IBAction func logoutUser(_ sender: UIButton) {
         
+        // NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
+
         PFUser.logOutInBackground { (error: Error?) in
+        }
             
             // PFUser.currentUser() will now be nil
             print("User logged out successfully")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        present(loginViewController, animated: true)  {
+            
+        }
 
             // go back to login by dismissing modal view
             // self.dismiss(animated: true, completion: nil)
             
             // go back to login by segue
-            self.performSegue(withIdentifier: "logoutSegue", sender: nil)
-        }
+            // self.performSegue(withIdentifier: "logoutSegue", sender: nil)
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -37,9 +45,10 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     var isMoreDataLoading = false
     var loadingMoreView: InfiniteScrollActivityView?
     
-    func refresh(withLimit limit: Int = 4) {
+    func refresh(withLimit limit: Int = 15) {
         
         let query = PFQuery(className: "Post")
+        query.whereKey("author", equalTo: PFUser.current()!)
         query.order(byDescending: "createdAt")
         query.includeKey("author")
         // HELP: WHEN TO USE createdAt and _created_at
@@ -102,7 +111,6 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         return cell
     }
     
-    // PULL TO REFRESH DOES NOT WORK FOR COLLECTION VIEW
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
         refresh()
         self.collectionView.reloadData()
@@ -125,7 +133,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                 loadingMoreView!.startAnimating()
                 
                 // Code to load more results
-                refresh(withLimit: self.posts.count + 4)
+                refresh(withLimit: self.posts.count + 15)
             }
         }
     }
